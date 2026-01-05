@@ -14,7 +14,6 @@ export default function ProductsFilter({
   categories,
   className,
 }: ProductsFilterProps) {
-  console.log(categories);
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -100,7 +99,7 @@ export default function ProductsFilter({
   return (
     <section
       aria-label="Filtros de produtos"
-      className={`sticky top-0 z-10 rounded-lg border border-black/10 bg-white p-4 h-[calc(100vh-2rem)] overflow-auto ${
+      className={`z-10 rounded-lg border border-black/10 bg-white p-4 overflow-auto lg:sticky lg:top-0 lg:h-[calc(100vh-2rem)] ${
         className ?? ""
       }`}
     >

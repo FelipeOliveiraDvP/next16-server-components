@@ -2,6 +2,8 @@ import { Category, Product, ProductListResponse } from "@/types";
 import ProductCard from "./product-card";
 import ProductsFilter from "@/components/products-filter";
 import ProductsPagination from "@/components/products-pagination";
+import FiltersDrawer from "@/components/filters-drawer";
+import BackToTopButton from "@/components/back-to-top-button";
 
 type SortValue = "name-asc" | "price-desc";
 
@@ -73,11 +75,15 @@ export default async function Home({
 
   return (
     <main>
-      <div className="grid grid-cols-3 container mx-auto">
-        <div className="col-span-1 p-4">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Desktop sidebar: visible on lg and up */}
+        <div className="hidden lg:block col-span-1 p-4">
           <ProductsFilter categories={categories} />
         </div>
-        <div className="flex flex-col space-y-4 col-span-2">
+        {/* Products column: full width on mobile, 2 cols on md, 2/3 on lg */}
+        <div className="flex flex-col space-y-4 col-span-1 md:col-span-2">
+          {/* Mobile/Tablet filters drawer trigger */}
+          <FiltersDrawer categories={categories} />
           {data.products.length === 0 ? (
             <div className="flex items-center justify-center p-8 rounded-lg border border-black/10 bg-white text-black/60 h-full">
               Não há produtos
@@ -90,6 +96,8 @@ export default async function Home({
             </div>
           )}
           <ProductsPagination totalPages={totalPages} />
+          {/* Floating back-to-top button */}
+          <BackToTopButton />
         </div>
       </div>
     </main>
