@@ -100,7 +100,7 @@ export default function ProductsFilter({
   return (
     <section
       aria-label="Filtros de produtos"
-      className={`sticky top-0 z-10 rounded-lg border border-black/10 bg-white p-4 shadow-sm ${
+      className={`sticky top-0 z-10 rounded-lg border border-black/10 bg-white p-4 h-[calc(100vh-2rem)] overflow-auto ${
         className ?? ""
       }`}
     >

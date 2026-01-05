@@ -20,7 +20,7 @@ export default async function Home({
 
   // Allow overriding via URL (optional), else default to 10
   const limitParam = Number((sp.limit as string) ?? "");
-  const limit = Number.isFinite(limitParam) && limitParam > 0 ? limitParam : 10;
+  const limit = Number.isFinite(limitParam) && limitParam > 0 ? limitParam : 12;
   const skip = (page - 1) * limit;
 
   // Map UI sort values to API sortBy/order
@@ -73,14 +73,22 @@ export default async function Home({
 
   return (
     <main>
-      <div className="grid grid-cols-3 container mx-auto px-4 py-8 gap-6">
-        <ProductsFilter categories={categories} />
+      <div className="grid grid-cols-3 container mx-auto">
+        <div className="col-span-1 p-4">
+          <ProductsFilter categories={categories} />
+        </div>
         <div className="flex flex-col space-y-4 col-span-2">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {data.products.map((product: Product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {data.products.length === 0 ? (
+            <div className="flex items-center justify-center p-8 rounded-lg border border-black/10 bg-white text-black/60 h-full">
+              Não há produtos
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+              {data.products.map((product: Product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
           <ProductsPagination totalPages={totalPages} />
         </div>
       </div>
